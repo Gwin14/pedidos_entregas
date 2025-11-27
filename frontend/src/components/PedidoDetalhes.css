@@ -1,0 +1,15 @@
+/* Página de detalhes */
+h1 {
+  margin-bottom: 20px;
+}
+
+p {
+  margin-bottom: 12px;
+  font-size: 16px;
+  color: black;
+}
+
+a {
+  display: inline-block;
+  margin-top: 20px;
+}

@@ -1,4 +1,5 @@
 import PedidoList from "./components/PedidoList";
+import "./App.css";
 
 function App() {
   return (

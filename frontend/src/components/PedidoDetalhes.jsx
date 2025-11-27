@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import api from "../api";
-import "./PedidoDetalhes.css";
 
 export default function PedidoDetalhes() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [pedido, setPedido] = useState(null);
 
   useEffect(() => {
@@ -14,6 +14,11 @@ export default function PedidoDetalhes() {
     };
     fetchPedido();
   }, [id]);
+
+  const handleConcluir = async () => {
+    const res = await api.patch(`pedidos/${id}/`, { status: "entregue" });
+    setPedido(res.data);
+  };
 
   if (!pedido) return <p>Carregando...</p>;
 
@@ -46,12 +51,28 @@ export default function PedidoDetalhes() {
         <strong>Atualizado em:</strong>{" "}
         {new Date(pedido.atualizado_em).toLocaleString()}
       </p>
-      <Link
-        to="/"
-        style={{ textDecoration: "none", color: "#4caf50", fontWeight: "500" }}
-      >
-        ← Voltar
-      </Link>
+
+      {pedido.status !== "entregue" && (
+        <button
+          onClick={handleConcluir}
+          style={{ backgroundColor: "#2196f3", marginTop: "15px" }}
+        >
+          Concluir Pedido
+        </button>
+      )}
+
+      <div style={{ marginTop: "20px" }}>
+        <Link
+          to="/"
+          style={{
+            textDecoration: "none",
+            color: "#4caf50",
+            fontWeight: "500",
+          }}
+        >
+          ← Voltar
+        </Link>
+      </div>
     </div>
   );
 }

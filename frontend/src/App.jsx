@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "./App.css";
 import PedidoList from "./components/PedidoList";
 import PedidoDetalhes from "./components/PedidoDetalhes";
 

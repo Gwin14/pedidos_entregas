@@ -19,6 +19,12 @@ export default function PedidoList() {
     setPedidos([...pedidos, pedido]);
   };
 
+  const handleUpdate = (pedidoAtualizado) => {
+    setPedidos(
+      pedidos.map((p) => (p.id === pedidoAtualizado.id ? pedidoAtualizado : p))
+    );
+  };
+
   const handleDelete = (id) => {
     setPedidos(pedidos.filter((p) => p.id !== id));
   };
@@ -29,7 +35,12 @@ export default function PedidoList() {
       <PedidoForm onAdd={handleAdd} />
       <ul>
         {pedidos.map((pedido) => (
-          <PedidoItem key={pedido.id} pedido={pedido} onDelete={handleDelete} />
+          <PedidoItem
+            key={pedido.id}
+            pedido={pedido}
+            onDelete={handleDelete}
+            onUpdate={handleUpdate}
+          />
         ))}
       </ul>
     </div>

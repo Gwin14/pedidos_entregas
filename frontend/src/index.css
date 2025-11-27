@@ -1,177 +1,598 @@
+/* ============================================================================
+   RESET & CONFIGURAÇÕES GLOBAIS
+   ============================================================================ */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ============================================================================
+   VARIÁVEIS CSS (Design Tokens - Paleta Moderna)
+   ============================================================================ */
+
+:root {
+  /* Cores Primárias - Paleta Moderna Sofisticada */
+  --color-primary: #2563eb; /* Azul vibrante */
+  --color-primary-hover: #1d4ed8; /* Azul escuro */
+  --color-primary-active: #1e40af; /* Azul mais escuro */
+  --color-primary-light: #dbeafe; /* Azul muito claro */
+
+  /* Cores Secundárias */
+  --color-success: #10b981; /* Verde esmeralda */
+  --color-success-light: #d1fae5;
+  --color-warning: #f59e0b; /* Âmbar/Laranja */
+  --color-warning-light: #fef3c7;
+  --color-info: #06b6d4; /* Cyan */
+  --color-info-light: #cffafe;
+
+  /* Cores de Superfície */
+  --color-background: #f8fafc; /* Cinza muito claro */
+  --color-surface: #ffffff; /* Branco puro */
+  --color-surface-secondary: #f1f5f9; /* Cinza claro */
+  --color-surface-tertiary: #e2e8f0; /* Cinza médio */
+
+  /* Cores de Texto */
+  --color-text-primary: #0f172a; /* Quase preto */
+  --color-text-secondary: #475569; /* Cinza escuro */
+  --color-text-tertiary: #64748b; /* Cinza médio */
+  --color-text-disabled: #cbd5e1; /* Cinza claro */
+
+  /* Cores de Fronteira */
+  --color-border-light: #e2e8f0;
+  --color-border-medium: #cbd5e1;
+  --color-border-dark: #94a3b8;
+
+  /* Tipografia */
+  --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  --font-family-mono: "Menlo", "Monaco", "Courier New", monospace;
+
+  --font-size-xs: 0.75rem; /* 12px */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-base: 1rem; /* 16px */
+  --font-size-lg: 1.125rem; /* 18px */
+  --font-size-xl: 1.25rem; /* 20px */
+  --font-size-2xl: 1.5rem; /* 24px */
+  --font-size-3xl: 1.875rem; /* 30px */
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  /* Espaçamento (Escala 4px) */
+  --spacing-0: 0;
+  --spacing-1: 0.25rem; /* 4px */
+  --spacing-2: 0.5rem; /* 8px */
+  --spacing-3: 0.75rem; /* 12px */
+  --spacing-4: 1rem; /* 16px */
+  --spacing-5: 1.25rem; /* 20px */
+  --spacing-6: 1.5rem; /* 24px */
+  --spacing-7: 1.75rem; /* 28px */
+  --spacing-8: 2rem; /* 32px */
+  --spacing-10: 2.5rem; /* 40px */
+  --spacing-12: 3rem; /* 48px */
+  --spacing-16: 4rem; /* 64px */
+
+  /* Raios de Borda */
+  --radius-none: 0;
+  --radius-sm: 0.375rem; /* 6px */
+  --radius-md: 0.5rem; /* 8px */
+  --radius-lg: 0.75rem; /* 12px */
+  --radius-xl: 1rem; /* 16px */
+  --radius-2xl: 1.5rem; /* 24px */
+  --radius-full: 9999px;
+
+  /* Sombras - Profundidade moderna */
+  --shadow-none: 0 0 0 rgba(0, 0, 0, 0);
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+  --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.15);
+
+  /* Transições */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Z-index */
+  --z-dropdown: 1000;
+  --z-sticky: 100;
+  --z-fixed: 1020;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+
+  /* Breakpoints */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+}
+
+/* ============================================================================
+   ESTILOS BASE
+   ============================================================================ */
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background-color: #f0f2f5;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-primary);
+  background-color: var(--color-background);
   display: flex;
   justify-content: center;
   align-items: flex-start;
   min-height: 100vh;
-  padding: 50px 20px;
+  padding: var(--spacing-8) var(--spacing-4);
+  transition: background-color var(--transition-base);
 }
 
+/* Melhor tipografia com hierarquia visual clara */
+h1 {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  text-align: center;
+  margin-bottom: var(--spacing-8);
+  letter-spacing: -0.02em;
+  line-height: var(--line-height-tight);
+}
+
+p {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-4);
+  line-height: var(--line-height-normal);
+}
+
+/* Links com estados visuais aprimorados */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+  transition: color var(--transition-fast),
+    text-decoration var(--transition-fast);
+  position: relative;
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+a:active {
+  color: var(--color-primary-active);
+}
+
+/* ============================================================================
+   CONTAINER PRINCIPAL
+   ============================================================================ */
+
+/* Design moderno com sombra de elevação */
 .container {
   max-width: 700px;
   width: 100%;
-  background-color: #ffffff;
-  padding: 35px;
-  border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  background-color: var(--color-surface);
+  padding: var(--spacing-8);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--color-border-light);
+  transition: box-shadow var(--transition-base),
+    border-color var(--transition-base);
 }
 
-h1 {
-  text-align: center;
-  color: #222;
-  margin-bottom: 30px;
-  font-size: 28px;
+.container:hover {
+  box-shadow: var(--shadow-xl);
 }
+
+/* ============================================================================
+   FORMULÁRIO
+   ============================================================================ */
 
 form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  margin-bottom: 30px;
+  gap: var(--spacing-4);
+  margin-bottom: var(--spacing-8);
 }
 
+/* Inputs com melhor design e feedback visual */
 input {
-  padding: 12px 15px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  font-size: 16px;
-  transition: 0.2s;
+  padding: var(--spacing-3) var(--spacing-4);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-primary);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-fast),
+    background-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+input::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+input:hover:not(:focus) {
+  border-color: var(--color-border-medium);
+  background-color: var(--color-surface-secondary);
 }
 
 input:focus {
-  border-color: #4caf50;
+  border-color: var(--color-primary);
+  background-color: var(--color-primary-light);
   outline: none;
-  box-shadow: 0 0 5px rgba(76, 175, 80, 0.4);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
+input:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -1px;
+}
+
+input:disabled {
+  background-color: var(--color-surface-secondary);
+  color: var(--color-text-disabled);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ============================================================================
+   BOTÕES
+   ============================================================================ */
+
+/* Botões com design moderno e melhor acessibilidade */
 button {
-  padding: 12px;
-  background-color: #4caf50;
-  color: white;
+  padding: var(--spacing-3) var(--spacing-5);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
   border: none;
-  border-radius: 10px;
-  font-size: 16px;
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all var(--transition-base);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* Botão Primário (Padrão) */
+button {
+  background-color: var(--color-primary);
+  color: white;
+  box-shadow: var(--shadow-sm);
 }
 
 button:hover {
-  background-color: #45a049;
-  transform: translateY(-2px);
-}
-
-button.concluir {
-  background-color: #2196f3;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 15px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-button.concluir:hover {
-  background-color: #1976d2;
+  background-color: var(--color-primary-hover);
+  box-shadow: var(--shadow-md);
   transform: translateY(-1px);
 }
 
+button:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-xs);
+}
+
+button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+button:disabled {
+  background-color: var(--color-surface-tertiary);
+  color: var(--color-text-disabled);
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.6;
+}
+
+/* Botão Secundário (.concluir) com estilos aprimorados */
+button.concluir {
+  background-color: var(--color-info);
+  color: white;
+  padding: var(--spacing-2) var(--spacing-4);
+  font-size: var(--font-size-sm);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-xs);
+}
+
+button.concluir:hover {
+  background-color: #0891b2;
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
+}
+
+button.concluir:active {
+  transform: translateY(0);
+}
+
+button.concluir:focus-visible {
+  outline: 2px solid var(--color-info);
+  outline-offset: 2px;
+}
+
+/* ============================================================================
+   LISTA DE ITENS
+   ============================================================================ */
+
+/* Lista com melhor organização visual */
 ul {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: var(--spacing-4);
+  margin: 0;
+  padding: 0;
 }
+
+/* Itens com design refinado e melhor estado hover */
 
 li {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
-  background-color: #f8f9fa;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  transition: all 0.2s;
-  color: #222;
+  padding: var(--spacing-4) var(--spacing-6);
+  background-color: var(--color-surface-secondary);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xs);
+  transition: all var(--transition-base);
 }
 
 li:hover {
-  background-color: #f1f3f5;
-  transform: translateY(-1px);
+  background-color: var(--color-surface);
+  border-color: var(--color-border-medium);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
 
+li:active {
+  transform: translateY(0);
+}
+
+li:focus-within {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+li a {
+  color: #ffffff !important;
+}
+
+li a:hover {
+  color: #e2e8f0 !important;
+  text-decoration: underline;
+}
+
+/* Botões dentro de itens com melhor estilo */
 li button {
-  padding: 6px 12px;
-  font-size: 14px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  transition: 0.2s;
+  padding: var(--spacing-2) var(--spacing-3);
+  font-size: var(--font-size-sm);
+  background-color: var(--color-info);
+  color: white !important;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-xs);
+  margin-left: var(--spacing-2);
 }
 
 li button:hover {
+  background-color: #0891b2;
+  box-shadow: var(--shadow-sm);
   transform: translateY(-1px);
 }
 
+/* ============================================================================
+   BADGES DE STATUS
+   ============================================================================ */
+
+/* Status com design moderno e melhor contraste */
 .status {
-  padding: 5px 12px;
-  border-radius: 12px;
-  color: white;
-  font-size: 13px;
-  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
   text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  color: white;
 }
 
 .status.pendente {
-  background-color: #ff9800;
+  background-color: var(--color-warning);
 }
 
 .status.em_transito {
-  background-color: #2196f3;
+  background-color: var(--color-info);
 }
 
 .status.entregue {
-  background-color: #4caf50;
+  background-color: var(--color-success);
 }
 
-p {
-  margin-bottom: 12px;
-  font-size: 16px;
-  color: #222;
-}
+/* ============================================================================
+   MEDIA QUERIES - RESPONSIVO
+   ============================================================================ */
 
-a {
-  display: inline-block;
-  margin-top: 20px;
-  text-decoration: none;
-  color: #4caf50;
-  font-weight: 500;
-  transition: 0.2s;
-}
+/* Melhor adaptação para mobile com ajustes finos */
+@media (max-width: 768px) {
+  body {
+    padding: var(--spacing-4) var(--spacing-3);
+  }
 
-a:hover {
-  color: #388e3c;
-}
-
-@media (max-width: 750px) {
   .container {
-    padding: 25px;
+    padding: var(--spacing-6);
+    border-radius: var(--radius-xl);
   }
 
   h1 {
-    font-size: 24px;
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--spacing-6);
   }
 
+  form {
+    gap: var(--spacing-3);
+    margin-bottom: var(--spacing-6);
+  }
+
+  input {
+    padding: var(--spacing-3) var(--spacing-3);
+    font-size: 16px; /* Previne zoom no iOS */
+  }
+
+  button {
+    padding: var(--spacing-3) var(--spacing-4);
+  }
+
+  /* Lista em layout de coluna no mobile */
   li {
     flex-direction: column;
     align-items: flex-start;
-    gap: 10px;
+    gap: var(--spacing-3);
+    padding: var(--spacing-3) var(--spacing-4);
+  }
+
+  li button {
+    align-self: flex-end;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: var(--spacing-3) var(--spacing-2);
+  }
+
+  .container {
+    padding: var(--spacing-4);
+    border-radius: var(--radius-lg);
+  }
+
+  h1 {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-4);
+  }
+
+  button {
+    width: 100%;
+  }
+
+  li button {
+    width: 100%;
+    align-self: stretch;
+  }
+}
+
+/* ============================================================================
+   ACESSIBILIDADE
+   ============================================================================ */
+
+/* Suporte a preferência de movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Modo de alto contraste */
+@media (prefers-contrast: more) {
+  :root {
+    --color-border-light: var(--color-border-medium);
+    --color-text-secondary: var(--color-text-primary);
+  }
+
+  input:focus,
+  button:focus-visible,
+  a:focus-visible {
+    outline-width: 3px;
+    outline-offset: 3px;
+  }
+}
+
+/* Modo escuro (Sistema Operacional) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #0f172a;
+    --color-surface: #1e293b;
+    --color-surface-secondary: #334155;
+    --color-surface-tertiary: #475569;
+    --color-text-primary: #f1f5f9;
+    --color-text-secondary: #cbd5e1;
+    --color-text-tertiary: #94a3b8;
+    --color-border-light: #334155;
+    --color-border-medium: #475569;
+  }
+
+  input::placeholder {
+    color: var(--color-text-tertiary);
+  }
+
+  a:hover {
+    color: #60a5fa;
+  }
+}
+
+/* ============================================================================
+   FOCO VISUAL PARA NAVEGAÇÃO POR TECLADO
+   ============================================================================ */
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ============================================================================
+   PRINT STYLES (Opcional mas útil)
+   ============================================================================ */
+
+@media print {
+  body {
+    background-color: white;
+    padding: 0;
+  }
+
+  .container {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+
+  button {
+    display: none;
   }
 }
